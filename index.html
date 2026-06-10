@@ -3,175 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carregando ❤️</title>
 
-<title>Stanley & Ana</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
 
-<link rel="stylesheet" href="style.css">
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    background:linear-gradient(
+        180deg,
+        #121212,
+        #1a1020,
+        #121212
+    );
 
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+.loading-container{
+    text-align:center;
+    color:white;
+    width:90%;
+    max-width:400px;
+}
+
+.heart{
+    font-size:90px;
+    animation:pulse 1.5s infinite;
+    filter:drop-shadow(0 0 15px #ff4d6d);
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#2b2b2b;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:#ff4d6d;
+    border-radius:20px;
+}
+
+#percent{
+    margin-top:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.2);
+    }
+}
+</style>
 </head>
 <body>
 
-<h3>Juntos Para Sempre </h3>
+<div class="loading-container">
+    <div class="heart">❤️</div>
+    <h1>Carregando Amor...</h1>
 
-<!-- FOTO PRINCIPAL -->
-
-<div class="player">
-
-    <img src="fotos/9.jpeg" class="foto-principal">
-
-    <div class="titulo">
-        Amor Sem Fim 
+    <div class="progress">
+        <div class="progress-bar" id="bar"></div>
     </div>
 
-    <div class="artista">
-        Stanley & Ana
-    </div>
-
-    <div class="progresso">
-        <div class="barra" id="barra"></div>
-    </div>
-
-    <div class="controles">
-
-        <i class="fa-solid fa-backward-step icone"></i>
-
-        <button class="play" onclick="playMusic()">
-            <i class="fa-solid fa-play" id="iconePlay"></i>
-        </button>
-
-        <i class="fa-solid fa-forward-step icone"></i>
-
-    </div>
-
-<audio id="musica" autoplay>
-    <source src="audio/AMOR SEM FIM A MUSICA FVRT DELA.mp3" type="audio/mpeg">
-</audio>
-
+    <div id="percent">0%</div>
 </div>
 
-<!-- CONTADOR -->
+<script>
+let progresso = 0;
 
-<div class="card">
+const barra = document.getElementById("bar");
+const texto = document.getElementById("percent");
 
-    <h2> Estamos Juntos Há</h2>
+const carregar = setInterval(() => {
+    progresso++;
 
-    <div class="contador">
+    barra.style.width = progresso + "%";
+    texto.innerHTML = progresso + "%";
 
-        <div class="box">
-            <span id="anos">0</span>
-            <small>Anos</small>
-        </div>
+    if(progresso >= 100){
+        clearInterval(carregar);
 
-        <div class="box">
-            <span id="meses">0</span>
-            <small>Meses</small>
-        </div>
+        // Troque pelo nome da sua página
+        window.location.href = "site.html";
+    }
 
-        <div class="box">
-            <span id="dias">0</span>
-            <small>Dias</small>
-        </div>
-
-        <div class="box">
-            <span id="horas">0</span>
-            <small>Horas</small>
-        </div>
-
-        <div class="box">
-            <span id="minutos">0</span>
-            <small>Minutos</small>
-        </div>
-
-        <div class="box">
-            <span id="segundos">0</span>
-            <small>Segundos</small>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- MENSAGEM -->
-
-<div class="mensagem-card_ana">
-
-    <h2> Mensagem Especial</h2>
-
-    <div class="texto-mensagem" id="mensagem">
-
-        Desde que você entrou na minha vida,
-        tudo ficou mais bonito.
-
-        Seu sorriso ilumina meus dias,
-        seu carinho me faz feliz
-        e sua presença transforma qualquer momento
-        em uma lembrança especial.
-
-        <br><br>
-
-        Obrigado por tudo.
-        Eu te amo muito ❤️
-
-    </div>
-
-    <button class="btn-mensagem" onclick="toggleMensagem()">
-        Mostrar Mensagem
-    </button>
-
-</div>
-
-<!-- DESTAQUES -->
-
-<div class="card">
-
-    <h2> Nossos Destaques</h2>
-
-    <div class="destaques">
-
-        <div class="destaque" onclick="abrirDestaque(0)">
-            <img src="fotos/1.jpeg">
-            <div class="legenda">Fotos Aleatórias</div>
-        </div>
-
-        <div class="destaque" onclick="abrirDestaque(1)">
-            <img src="fotos/2.jpeg">
-            <div class="legenda">Primeiro Encontro</div>
-        </div>
-
-        <div class="destaque" onclick="abrirDestaque(2)">
-            <img src="fotos/3.jpeg">
-            <div class="legenda">Stanley & Ana</div>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- MODAL STORIES -->
-
-<div class="modal" id="modal">
-
-    <div class="story-box">
-
-        <div class="story-progresso" id="progresso"></div>
-
-        <div class="info" id="titulo"></div>
-
-        <div class="fechar" onclick="fecharStory()">✕</div>
-
-        <img id="storyImage">
-
-        <div class="esquerda" onclick="anterior()"></div>
-        <div class="direita" onclick="proxima()"></div>
-
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+}, 40);
+</script>
 
 </body>
 </html>

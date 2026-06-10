@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stanley & Ana</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<h3>Juntos Para Sempre </h3>
+
+<!-- FOTO PRINCIPAL -->
+
+<div class="player">
+
+    <img src="fotos/9.jpeg" class="foto-principal">
+
+    <div class="titulo">
+        Amor Sem Fim 
+    </div>
+
+    <div class="artista">
+        Stanley & Ana
+    </div>
+
+    <div class="progresso">
+        <div class="barra" id="barra"></div>
+    </div>
+
+    <div class="controles">
+
+        <i class="fa-solid fa-backward-step icone"></i>
+
+        <button class="play" onclick="playMusic()">
+            <i class="fa-solid fa-play" id="iconePlay"></i>
+        </button>
+
+        <i class="fa-solid fa-forward-step icone"></i>
+
+    </div>
+
+<audio id="musica" autoplay>
+    <source src="audio/AMOR SEM FIM A MUSICA FVRT DELA.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<!-- CONTADOR -->
+
+<div class="card">
+
+    <h2> Estamos Juntos Há</h2>
+
+    <div class="contador">
+
+        <div class="box">
+            <span id="anos">0</span>
+            <small>Anos</small>
+        </div>
+
+        <div class="box">
+            <span id="meses">0</span>
+            <small>Meses</small>
+        </div>
+
+        <div class="box">
+            <span id="dias">0</span>
+            <small>Dias</small>
+        </div>
+
+        <div class="box">
+            <span id="horas">0</span>
+            <small>Horas</small>
+        </div>
+
+        <div class="box">
+            <span id="minutos">0</span>
+            <small>Minutos</small>
+        </div>
+
+        <div class="box">
+            <span id="segundos">0</span>
+            <small>Segundos</small>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MENSAGEM -->
+
+<div class="mensagem-card_ana">
+
+    <h2> Mensagem Especial</h2>
+
+    <div class="texto-mensagem" id="mensagem">
+
+        Desde que você entrou na minha vida,
+        tudo ficou mais bonito.
+
+        Seu sorriso ilumina meus dias,
+        seu carinho me faz feliz
+        e sua presença transforma qualquer momento
+        em uma lembrança especial.
+
+        <br><br>
+
+        Obrigado por tudo.
+        Eu te amo muito ❤️
+
+    </div>
+
+    <button class="btn-mensagem" onclick="toggleMensagem()">
+        Mostrar Mensagem
+    </button>
+
+</div>
+
+<!-- DESTAQUES -->
+
+<div class="card">
+
+    <h2> Nossos Destaques</h2>
+
+    <div class="destaques">
+
+        <div class="destaque" onclick="abrirDestaque(0)">
+            <img src="fotos/1.jpeg">
+            <div class="legenda">Fotos Aleatórias</div>
+        </div>
+
+        <div class="destaque" onclick="abrirDestaque(1)">
+            <img src="fotos/2.jpeg">
+            <div class="legenda">Primeiro Encontro</div>
+        </div>
+
+        <div class="destaque" onclick="abrirDestaque(2)">
+            <img src="fotos/3.jpeg">
+            <div class="legenda">Stanley & Ana</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL STORIES -->
+
+<div class="modal" id="modal">
+
+    <div class="story-box">
+
+        <div class="story-progresso" id="progresso"></div>
+
+        <div class="info" id="titulo"></div>
+
+        <div class="fechar" onclick="fecharStory()">✕</div>
+
+        <img id="storyImage">
+
+        <div class="esquerda" onclick="anterior()"></div>
+        <div class="direita" onclick="proxima()"></div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
