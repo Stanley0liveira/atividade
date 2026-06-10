@@ -2,7 +2,10 @@ const musica = document.getElementById("musica");
 const icone = document.getElementById("iconePlay");
 const barra = document.getElementById("barra");
 
-// Tenta tocar automaticamente
+/* =========================
+   AUTOPLAY
+========================= */
+
 window.addEventListener("load", () => {
 
     musica.play()
@@ -15,44 +18,46 @@ window.addEventListener("load", () => {
 
 });
 
-// Botão Play/Pause
+/* =========================
+   PLAY / PAUSE
+========================= */
+
 function playMusic(){
 
     if(musica.paused){
-
         musica.play();
         icone.className = "fa-solid fa-pause";
-
-    }else{
-
+    } else {
         musica.pause();
         icone.className = "fa-solid fa-play";
-
     }
-
 }
 
-// Barra de progresso
+/* =========================
+   BARRA DE PROGRESSO
+========================= */
+
 musica.addEventListener("timeupdate", () => {
 
-    const progresso =
-        (musica.currentTime / musica.duration) * 100;
+    if(!musica.duration) return;
 
+    const progresso = (musica.currentTime / musica.duration) * 100;
     barra.style.width = progresso + "%";
-
 });
 
-/* MENSAGEM */
+/* =========================
+   MENSAGEM
+========================= */
 
 function toggleMensagem(){
 
-    const mensagem =
-    document.getElementById("mensagem");
-
+    const mensagem = document.getElementById("mensagem");
     mensagem.classList.toggle("aberto");
 }
 
-/* CONTADOR */
+/* =========================
+   CONTADOR
+========================= */
 
 const inicio = new Date("2026-01-07T00:00:00");
 
@@ -61,26 +66,14 @@ function atualizarContador(){
     const agora = new Date();
     const diff = agora - inicio;
 
-    const segundos =
-    Math.floor(diff / 1000) % 60;
+    const segundos = Math.floor(diff / 1000) % 60;
+    const minutos = Math.floor(diff / (1000 * 60)) % 60;
+    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
 
-    const minutos =
-    Math.floor(diff / (1000 * 60)) % 60;
-
-    const horas =
-    Math.floor(diff / (1000 * 60 * 60)) % 24;
-
-    const diasTotal =
-    Math.floor(diff / (1000 * 60 * 60 * 24));
-
-    const anos =
-    Math.floor(diasTotal / 365);
-
-    const meses =
-    Math.floor((diasTotal % 365) / 30);
-
-    const dias =
-    Math.floor((diasTotal % 365) % 30);
+    const diasTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const anos = Math.floor(diasTotal / 365);
+    const meses = Math.floor((diasTotal % 365) / 30);
+    const dias = (diasTotal % 365) % 30;
 
     document.getElementById("anos").innerText = anos;
     document.getElementById("meses").innerText = meses;
@@ -90,46 +83,47 @@ function atualizarContador(){
     document.getElementById("segundos").innerText = segundos;
 }
 
-setInterval(atualizarContador,1000);
+setInterval(atualizarContador, 1000);
 atualizarContador();
 
-/* STORIES */
+/* =========================
+   STORIES / DESTAQUES
+========================= */
 
 const destaques = [
-
     {
-        nome:"Fotos Aleatórias",
-        imagens:[
+        nome: "Fotos Aleatórias",
+        imagens: [
+            "fotos/10.jpeg",
             "fotos/1.jpeg",
             "fotos/4.jpeg",
             "fotos/5.jpeg",
             "fotos/6.jpeg"
         ]
     },
-
     {
-        nome:"Primeiro Encontro",
-        imagens:[
+        nome: "Primeiro Encontro",
+        imagens: [
             "fotos/2.jpeg",
-            "fotos/7.jpeg",
-            "fotos/8.jpeg"
+            "fotos/7.jpeg"
         ]
     },
-
     {
-        nome:"Stanley & Ana",
-        imagens:[
-            "fotos/3.jpeg",
-            "fotos/9.jpeg",
-            "fotos/10.jpeg"
+        nome: "Stanley & Ana",
+        imagens: [
+            "fotos/12.jpeg",
+            "fotos/11.jpeg",
+            "fotos/14.jpeg",
+            "video/2.mp4"
         ]
     }
-
 ];
 
 let destaqueAtual = 0;
 let storyAtual = 0;
 let timer;
+
+/* ABRIR DESTAQUE */
 
 function abrirDestaque(indice){
 
@@ -137,102 +131,105 @@ function abrirDestaque(indice){
     storyAtual = 0;
 
     document.getElementById("modal").style.display = "flex";
-
-    document.getElementById("titulo").innerText =
-    destaques[indice].nome;
+    document.getElementById("titulo").innerText = destaques[indice].nome;
 
     criarBarras();
     mostrarStory();
 }
 
+/* BARRAS DE PROGRESSO */
+
 function criarBarras(){
 
-    const progresso =
-    document.getElementById("progresso");
-
+    const progresso = document.getElementById("progresso");
     progresso.innerHTML = "";
 
-    destaques[destaqueAtual].imagens.forEach(()=>{
+    destaques[destaqueAtual].imagens.forEach(() => {
 
-        const barra =
-        document.createElement("div");
-
+        const barra = document.createElement("div");
         barra.classList.add("story-barra");
 
-        const span =
-        document.createElement("span");
-
+        const span = document.createElement("span");
         barra.appendChild(span);
 
         progresso.appendChild(barra);
-
     });
 }
+
+/* MOSTRAR STORY */
 
 function mostrarStory(){
 
     clearTimeout(timer);
 
-    const imagens =
-    destaques[destaqueAtual].imagens;
+    const imagens = destaques[destaqueAtual].imagens;
+    const arquivo = imagens[storyAtual];
 
-    document.getElementById("storyImage").src =
-    imagens[storyAtual];
+    const img = document.getElementById("storyImage");
+    const video = document.getElementById("storyVideo");
 
-    const spans =
-    document.querySelectorAll(".story-barra span");
+    const spans = document.querySelectorAll(".story-barra span");
 
-    spans.forEach((span,index)=>{
+    spans.forEach((span, index) => {
 
         span.style.transition = "none";
 
         if(index < storyAtual){
-
             span.style.width = "100%";
-
-        }else{
-
+        } else {
             span.style.width = "0%";
         }
-
     });
 
-    setTimeout(()=>{
+    /* TROCA IMG / VIDEO */
+    if(arquivo.endsWith(".mp4")){
 
-        spans[storyAtual].style.transition =
-        "width 5s linear";
+        img.style.display = "none";
+        video.style.display = "block";
 
+        video.src = arquivo;
+        video.currentTime = 0;
+
+        video.play().catch(() => {});
+
+    } else {
+
+        video.pause();
+        video.style.display = "none";
+
+        img.style.display = "block";
+        img.src = arquivo;
+    }
+
+    /* ANIMA BARRA ATUAL */
+    setTimeout(() => {
+        spans[storyAtual].style.transition = "width 5s linear";
         spans[storyAtual].style.width = "100%";
+    }, 50);
 
-    },50);
-
-    timer = setTimeout(()=>{
+    /* PRÓXIMO STORY */
+    timer = setTimeout(() => {
 
         if(storyAtual < imagens.length - 1){
-
             storyAtual++;
             mostrarStory();
-
-        }else{
-
+        } else {
             fecharStory();
         }
 
-    },5000);
+    }, 5000);
 }
+
+/* CONTROLES */
 
 function proxima(){
 
-    const imagens =
-    destaques[destaqueAtual].imagens;
+    const imagens = destaques[destaqueAtual].imagens;
 
     if(storyAtual < imagens.length - 1){
-
         storyAtual++;
         mostrarStory();
-
-    }else{
-
+    } else {
         fecharStory();
     }
 }
@@ -240,16 +237,19 @@ function proxima(){
 function anterior(){
 
     if(storyAtual > 0){
-
         storyAtual--;
         mostrarStory();
     }
 }
 
+/* FECHAR */
+
 function fecharStory(){
 
     clearTimeout(timer);
 
-    document.getElementById("modal").style.display =
-    "none";
+    const video = document.getElementById("storyVideo");
+    video.pause();
+
+    document.getElementById("modal").style.display = "none";
 }

@@ -318,3 +318,25 @@ h3{
 
 .esquerda{ left:0; }
 .direita{ right:0; }
+
+.foto-casal{
+    width: calc(100% + 50px);
+    height: 600px;
+    object-fit: cover;
+
+    margin: -25px -25px 20px -25px;
+
+    border-radius: 25px 25px 0 0;
+}
+
+.card{
+    padding:25px;
+    border-radius:25px;
+}
+
+#storyImage,
+#storyVideo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
