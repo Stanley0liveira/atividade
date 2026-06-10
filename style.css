@@ -14,6 +14,7 @@ body{
     font-family:Arial,sans-serif;
     min-height:100vh;
 }
+
 h3{
     text-align:center;
     margin-top:20px;
@@ -27,6 +28,7 @@ h3{
     width:90%;
     max-width:560px;
     margin:auto;
+    padding-bottom:20px;
 }
 
 .foto-principal{
@@ -34,6 +36,7 @@ h3{
     height:500px;
     object-fit:cover;
     border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .titulo{
@@ -45,6 +48,10 @@ h3{
 .artista{
     color:#ccc;
 }
+
+/* =========================
+   PROGRESSO PLAYER
+========================= */
 
 .progresso{
     width:100%;
@@ -61,6 +68,10 @@ h3{
     background:#1DB954;
 }
 
+/* =========================
+   CONTROLES
+========================= */
+
 .controles{
     margin-top:25px;
     display:flex;
@@ -74,6 +85,13 @@ h3{
     border:none;
     border-radius:50%;
     font-size:25px;
+    cursor:pointer;
+    background:white;
+    transition:.2s;
+}
+
+.play:active{
+    transform:scale(0.92);
 }
 
 /* =========================
@@ -96,6 +114,7 @@ h3{
     background:#4f90d6;
     padding:25px;
     border-radius:25px;
+    box-shadow:0 0 25px rgba(255,105,180,.15);
 }
 
 /* =========================
@@ -127,7 +146,7 @@ h3{
 }
 
 .texto-mensagem.aberto{
-    max-height:1000px;
+    max-height:9999px;
 }
 
 .texto-mensagem.aberto::after{
@@ -195,9 +214,6 @@ h3{
     height:250px;
     border-radius:20px;
     overflow:hidden;
-}
-
-.destaque{
     cursor:pointer;
 }
 
@@ -234,7 +250,8 @@ h3{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.95);
+    background:rgba(0,0,0,.98);
+    backdrop-filter:blur(8px);
     z-index:9999;
     justify-content:center;
     align-items:center;
@@ -251,13 +268,19 @@ h3{
     overflow:hidden;
 }
 
-.story-box img{
+/* mídia dentro do story */
+.story-box img,
+.story-box video{
+    position:absolute;
+    inset:0;
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-/* PROGRESSO STORIES */
+/* =========================
+   PROGRESSO STORIES
+========================= */
 
 .story-progresso{
     position:absolute;
@@ -284,7 +307,9 @@ h3{
     background:white;
 }
 
-/* INFO + FECHAR */
+/* =========================
+   INFO + FECHAR
+========================= */
 
 .info{
     position:absolute;
@@ -305,7 +330,9 @@ h3{
     z-index:10;
 }
 
-/* ÁREAS DE CLIQUE STORIES */
+/* =========================
+   ÁREAS CLIQUE STORIES
+========================= */
 
 .esquerda,
 .direita{
@@ -319,24 +346,14 @@ h3{
 .esquerda{ left:0; }
 .direita{ right:0; }
 
+/* =========================
+   FOTO CASAL
+========================= */
+
 .foto-casal{
     width: calc(100% + 50px);
     height: 600px;
     object-fit: cover;
-
     margin: -25px -25px 20px -25px;
-
     border-radius: 25px 25px 0 0;
-}
-
-.card{
-    padding:25px;
-    border-radius:25px;
-}
-
-#storyImage,
-#storyVideo{
-    width:100%;
-    height:100%;
-    object-fit:cover;
 }
